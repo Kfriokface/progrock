@@ -98,4 +98,4 @@ Proyecto desarrollado como parte del curso de **Diseño de Interfaces Web**, cen
 ## ✍️ Autor
 
 Proyecto realizado por Alberto Sancho  
-Curso: Diseño de Interfaces Web
+Asignatura: Diseño de Interfaces Web
