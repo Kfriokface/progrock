@@ -1,101 +1,93 @@
-# 🎸 Rock Progresivo · Historia y Evolución
+# Rock Progresivo · Historia y Evolución
 
-Proyecto web dedicado al **rock progresivo** como lenguaje artístico y musical, explorando su historia, principales etapas, músicos clave y bandas esenciales desde finales de los años 60 hasta la actualidad.
+Proyecto web dedicado al **rock progresivo** como movimiento artístico y musical, abordando su **origen, evolución histórica, etapas principales, bandas clave y músicos fundamentales** desde finales de los años 60 hasta la actualidad.
 
-El sitio combina **contenido histórico**, **diseño visual atmosférico** y **experiencia interactiva**, con una aproximación conceptual coherente con el espíritu experimental del género.
-
----
-
-## 🧠 Concepto
-
-El rock progresivo se caracteriza por:
-- estructuras complejas
-- experimentación sonora
-- álbumes conceptuales
-- integración de influencias clásicas, jazz y música contemporánea
-
-Este proyecto traslada esa filosofía al diseño web mediante:
-- animaciones sutiles
-- uso expresivo del color
-- layouts no convencionales
-- navegación fluida y narrativa
+El sitio combina **contenido cultural de carácter divulgativo** con un **diseño visual inmersivo**, inspirado en la estética y la filosofía experimental del propio género.
 
 ---
 
-## 🧩 Contenidos
+## Contenidos
 
-- **Hero interactivo** con fondo animado y efectos cromáticos suaves  
-- **Historia del rock progresivo**, desde sus orígenes psicodélicos hasta la actualidad  
-- **Timeline visual** de etapas clave con diseño contrapeado  
-- **Bandas esenciales** con fichas informativas  
-- **Modales informativos** sobre músicos clave  
-- **Reproductor de audio conceptual** con mezcla ambiental (audio libre de derechos)
+El sitio se estructura en varias secciones principales:
+
+- **Hero inicial** con fondo animado y llamada visual al scroll  
+- **Historia del rock progresivo**, organizada en bloques narrativos y citas destacadas  
+- **Timeline de etapas** con diseño vertical y animaciones suaves  
+- **Bandas esenciales**, presentadas mediante tarjetas informativas  
+- **Álbumes imprescindibles**, mostrados en un slider horizontal accesible  
+- **Modales informativos** dedicados a músicos clave del género  
+
+Todo el contenido es estático y se apoya exclusivamente en **HTML y CSS**, sin dependencias de JavaScript.
 
 ---
 
-## 🎨 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - **HTML5 semántico**
 - **CSS3 (mobile first)**
-  - Grid y Flexbox
+  - Flexbox y Grid
+  - Scroll snap
   - Animaciones y transiciones
-  - Efectos visuales avanzados (filters, blend modes)
-- **JavaScript básico**
-  - Control de audio
-  - Interacciones ligeras
-- **Font Awesome**
-- **Google Fonts**
+  - Filtros y blend modes
+- **Font Awesome** (iconografía)
+- **Google Fonts** (Orbitron y Montserrat)
+
+No se utiliza JavaScript:  
+las interacciones (menú, modales, navegación) se resuelven mediante **CSS puro**.
 
 ---
 
-## 📐 Diseño y enfoque
+## Diseño y enfoque
 
 - Enfoque **mobile first**
-- Diseño responsive
-- Estética oscura e inmersiva
+- Diseño **responsive**
+- Navegación accesible y clara
+- Estética oscura y atmosférica
 - Animaciones no intrusivas
-- Prioridad en la legibilidad y la experiencia de lectura
+- Prioridad absoluta a la legibilidad y al contenido
+
+El menú de navegación se adapta a dispositivos móviles mediante un **menú tipo burger**, implementado sin JavaScript.
 
 ---
 
-## 🎧 Audio
+## Despliegue
 
-El proyecto incluye un **micro-player conceptual** integrado en la navegación, con una mezcla ambiental de corta duración creada a partir de audio libre de derechos.
+El proyecto está desplegado en **hosting propio**:
 
-> El objetivo del audio no es protagonismo, sino acompañar la experiencia de navegación.
+**https://progrock.albertosancho.es**
 
----
-
-## 🚀 Despliegue
-
-El proyecto puede visualizarse directamente desde GitHub Pages:
-
-👉 *(añade aquí la URL cuando actives Pages)*
+Se incluye un archivo `robots.txt` configurado para **bloquear el rastreo de motores de búsqueda**, al tratarse de un proyecto académico.
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
-/
 ├── index.html
 ├── css/
 │ └── style.css
 ├── img/
-│ └── (imágenes del proyecto)
-├── audio/
-│ └── prog-mix-01.mp3
+│ ├── albums/
+│ ├── bands/
+│ └── musicians/
+├── robots.txt
 └── README.md
 
+---
+
+## Contexto académico
+
+Proyecto desarrollado como parte de la asignatura **Diseño de Interfaces Web**, centrado en:
+
+- estructura semántica
+- diseño visual
+- experiencia de usuario
+- adaptación responsive
+- uso avanzado de CSS moderno
 
 ---
 
-## 📝 Contexto académico
+## Autor
 
-Proyecto desarrollado como parte del curso de **Diseño de Interfaces Web**, centrado en la integración de contenido, diseño visual y experiencia de usuario.
-
----
-
-## ✍️ Autor
-
-Proyecto realizado por Alberto Sancho  
-Asignatura: Diseño de Interfaces Web
+**Alberto Sancho**  
+Asignatura: Diseño de Interfaces Web  
+Fecha: Diciembre 2025
