@@ -866,6 +866,31 @@ body:hover .hero__scroll {
   opacity: 0.6;
 }
 
+.footer__tech {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.footer__tech i {
+  font-size: 1.4rem;
+}
+
+.footer__tech-label {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.footer__tech-text {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
 
 /* =====================================================
    ASIDE - Modals
