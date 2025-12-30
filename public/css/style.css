@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 /* =====================================================
    VARIABLES
 ===================================================== */
@@ -32,7 +39,8 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html {
@@ -58,6 +66,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
+  background: -webkit-gradient(linear, left top, left bottom, from(var(--color-accent)), to(var(--color-accent-soft)));
   background: linear-gradient(var(--color-accent), var(--color-accent-soft));
   border-radius: 1px;
 }
@@ -102,49 +111,139 @@ p:last-child {
 
 .nav {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: var(--nav-height);
-  background: rgba(13, 15, 20, .7);
-  backdrop-filter: blur(6px);
+  background: rgba(13, 15, 20, 0.9);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
   z-index: 100;
-  box-shadow: 0 0 5px -3px var(--color-text-muted);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 0 1rem;
+  -webkit-box-shadow: 0 0 5px -3px var(--color-text-muted);
+          box-shadow: 0 0 5px -3px var(--color-text-muted);
 }
 
-.nav__list {
+/* toggle invisible */
+.nav__toggle {
+  display: none;
+}
+
+/* burger visible en mobile */
+.nav__burger {
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 101;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.nav__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  -webkit-transition: opacity 0.25s ease, -webkit-transform 0.25s ease;
+  transition: opacity 0.25s ease, -webkit-transform 0.25s ease;
+  -o-transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease, -webkit-transform 0.25s ease;
+}
+
+.nav__icon > .nav__label {
+  font-family: var(--font-text);
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+/* por defecto */
+.nav__icon--close {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* cuando está abierto */
+.nav__toggle:checked + .nav__burger .nav__icon--open {
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+          transform: scale(0.8);
+}
+
+.nav__toggle:checked + .nav__burger .nav__icon--close {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav__toggle:checked + .nav__burger {
+  color: var(--color-accent);
+}
+
+/* menú oculto por defecto */
+.nav__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(13, 15, 20, 0.98);
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+
   list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.4s ease;
+  -o-transition: max-height 0.4s ease;
+  transition: max-height 0.4s ease;
+}
+
+.nav__item {
+  padding: 1rem 0;
 }
 
 .nav__link {
   position: relative;
   color: var(--color-text-main);
   text-decoration: none;
+  -webkit-transition: color var(--transition-fast);
+  -o-transition: color var(--transition-fast);
   transition: color var(--transition-fast);
 }
 
-.nav__link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.3rem;
-  width: 0;
-  height: 2px;
-  background-color: var(--color-accent);
-  transition: width var(--transition-fast);
-}
-
-.nav__link:hover::after {
-  width: 100%;
-}
-
-body:has(#inicio:target) .nav__link[href="#inicio"]::after,
-body:has(#historia:target) .nav__link[href="#historia"]::after,
-body:has(#etapas:target) .nav__link[href="#etapas"]::after,
-body:has(#bandas:target) .nav__link[href="#bandas"]::after {
-  width: 100%;
+/* menú abierto */
+.nav__toggle:checked ~ .nav__list {
+  max-height: 60vh;
 }
 
 /* ================= HERO ================= */
@@ -152,6 +251,19 @@ body:has(#bandas:target) .nav__link[href="#bandas"]::after {
 .hero {
   min-height: 100vh;
   position: relative;
+  background:
+    -webkit-gradient(linear,
+      left top, left bottom,
+      from(rgba(13, 15, 20, 0.9)),
+      color-stop(40%, rgba(13, 15, 20, 0.6)),
+      to(rgba(13, 15, 20, 0.9))),
+    url("../img/hero-bg.jpg");
+  background:
+    -o-linear-gradient(top,
+      rgba(13, 15, 20, 0.9) 0%,
+      rgba(13, 15, 20, 0.6) 40%,
+      rgba(13, 15, 20, 0.9) 100%),
+    url("../img/hero-bg.jpg");
   background:
     linear-gradient(180deg,
       rgba(13, 15, 20, 0.9) 0%,
@@ -168,6 +280,15 @@ body:has(#bandas:target) .nav__link[href="#bandas"]::after {
   position: absolute;
   inset: 0;
   background:
+    -o-radial-gradient(30% 30%,
+      circle,
+      rgba(127, 90, 240, 0.15),
+      transparent 40%),
+    -o-radial-gradient(70% 60%,
+      circle,
+      rgba(165, 148, 249, 0.1),
+      transparent 45%);
+  background:
     radial-gradient(circle at 30% 30%,
       rgba(127, 90, 240, 0.15),
       transparent 40%),
@@ -175,7 +296,8 @@ body:has(#bandas:target) .nav__link[href="#bandas"]::after {
       rgba(165, 148, 249, 0.1),
       transparent 45%);
   mix-blend-mode: screen;
-  animation: heroColorDrift 6s ease-in-out infinite alternate;
+  -webkit-animation: heroColorDrift 6s ease-in-out infinite alternate;
+          animation: heroColorDrift 6s ease-in-out infinite alternate;
 }
 
 .hero::before {
@@ -188,10 +310,19 @@ body:has(#bandas:target) .nav__link[href="#bandas"]::after {
 .hero__content {
   position: relative;
   min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-align: center;
   padding: 2rem;
   z-index: 1;
@@ -201,11 +332,16 @@ body:has(#bandas:target) .nav__link[href="#bandas"]::after {
   position: absolute;
   bottom: 4rem;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   font-size: 1.5rem;
   color: var(--color-text-muted);
-  animation: bounce 1.8s infinite;
+  -webkit-animation: bounce 1.8s infinite;
+          animation: bounce 1.8s infinite;
   z-index: 1;
+  -webkit-transition: opacity 0.6s ease;
+  -o-transition: opacity 0.6s ease;
   transition: opacity 0.6s ease;
 }
 
@@ -216,8 +352,10 @@ body:hover .hero__scroll {
 .hero__title {
   mix-blend-mode: difference;
   text-transform: uppercase;
-  animation: fadeUp 1s ease forwards, textShimmer 6s ease-in-out infinite;
-  animation-delay: 0.2s;
+  -webkit-animation: fadeUp 1s ease forwards, textShimmer 6s ease-in-out infinite;
+          animation: fadeUp 1s ease forwards, textShimmer 6s ease-in-out infinite;
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
 }
 
 .hero__eyebrow {
@@ -226,12 +364,15 @@ body:hover .hero__scroll {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  animation: fadeUp 1s ease forwards;
+  -webkit-animation: fadeUp 1s ease forwards;
+          animation: fadeUp 1s ease forwards;
 }
 
 .hero__subtitle {
-  animation: fadeUp 1s ease forwards;
-  animation-delay: 0.4s;
+  -webkit-animation: fadeUp 1s ease forwards;
+          animation: fadeUp 1s ease forwards;
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
 }
 
 /* =====================================================
@@ -256,7 +397,9 @@ body:hover .hero__scroll {
    SECTION - Historia
 ===================================================== */
 .historia__bloque {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
   gap: 2rem;
 }
@@ -273,13 +416,16 @@ body:hover .hero__scroll {
   color: var(--color-text-muted);
   border-left: 2px solid var(--color-accent);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
+  -webkit-box-shadow: var(--shadow-soft);
+          box-shadow: var(--shadow-soft);
 }
 
 .historia__link {
   color: var(--color-accent-soft);
   text-decoration: none;
   font-weight: 700;
+  -webkit-transition: color var(--transition-fast);
+  -o-transition: color var(--transition-fast);
   transition: color var(--transition-fast);
 }
 
@@ -295,6 +441,16 @@ body:hover .hero__scroll {
 .etapas {
   position: relative;
   background:
+    -webkit-gradient(linear,
+      left top, left bottom,
+      from(rgba(13, 15, 20, 0.7)),
+      to(rgba(13, 15, 20, 0.8))),
+    url("../img/parallax-bg.jpg") center / cover no-repeat;
+  background:
+    -o-linear-gradient(rgba(13, 15, 20, 0.7),
+      rgba(13, 15, 20, 0.8)),
+    url("../img/parallax-bg.jpg") center / cover no-repeat;
+  background:
     linear-gradient(rgba(13, 15, 20, 0.7),
       rgba(13, 15, 20, 0.8)),
     url("../img/parallax-bg.jpg") center / cover no-repeat;
@@ -304,16 +460,26 @@ body:hover .hero__scroll {
   content: "";
   position: absolute;
   inset: 0;
+  background: -o-radial-gradient(30% 40%,
+      circle,
+      rgba(179, 144, 31, 0.12),
+      transparent 60%);
   background: radial-gradient(circle at 30% 40%,
       rgba(179, 144, 31, 0.12),
       transparent 60%);
-  animation: heroColorDrift 6s ease-in-out infinite alternate;
+  -webkit-animation: heroColorDrift 6s ease-in-out infinite alternate;
+          animation: heroColorDrift 6s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
 .etapas__timeline {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 2rem;
   position: relative;
   z-index: 1;
@@ -327,6 +493,8 @@ body:hover .hero__scroll {
   left: .5rem;
   width: 2px;
   z-index: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(var(--color-accent)), to(transparent));
+  background: -o-linear-gradient(var(--color-accent), transparent);
   background: linear-gradient(var(--color-accent), transparent);
 }
 
@@ -335,29 +503,38 @@ body:hover .hero__scroll {
   margin-left: 2rem;
   padding: 1rem;
   border-radius: var(--radius);
-  animation: fadeSlideIn .8s ease both;
-  transition: transform var(--transition-fast),
+  -webkit-animation: fadeSlideIn .8s ease both;
+          animation: fadeSlideIn .8s ease both;
+  -webkit-transition: -webkit-transform var(--transition-fast);
+  transition: -webkit-transform var(--transition-fast);
+  -o-transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), -webkit-transform var(--transition-fast)
 }
 
 @media (hover: hover) {
   .etapas__item:hover {
-    transform: translateX(8px);
+    -webkit-transform: translateX(8px);
+        -ms-transform: translateX(8px);
+            transform: translateX(8px);
   }
 }
 
 .etapas__icon {
   position: absolute;
-  left: calc(-2.8rem);
+  left: -2.4rem;
   z-index: 1;
-
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   background: var(--color-accent);
   border-radius: 50%;
+  display: -ms-grid;
   display: grid;
   place-items: center;
-
-  box-shadow:
+  -webkit-box-shadow:
+    0 0 0 6px rgba(179, 144, 31, 0.15),
+    var(--shadow-soft);
+          box-shadow:
     0 0 0 6px rgba(179, 144, 31, 0.15),
     var(--shadow-soft);
 }
@@ -378,6 +555,7 @@ body:hover .hero__scroll {
 .etapas__title,
 .etapas__text,
 .etapas__band {
+  -ms-grid-column: 2;
   grid-column: 2;
 }
 
@@ -386,28 +564,53 @@ body:hover .hero__scroll {
 ===================================================== */
 
 .bandas__grid {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
   gap: 2.5rem;
 }
 
 .bandas__card {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   position: relative;
   background: var(--color-bg-secondary);
   padding: 2.5rem 2rem;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
+  -webkit-box-shadow: var(--shadow-soft);
+          box-shadow: var(--shadow-soft);
   text-align: center;
+  -webkit-transition:
+    -webkit-transform var(--transition-fast),
+    -webkit-box-shadow var(--transition-fast);
+  transition:
+    -webkit-transform var(--transition-fast),
+    -webkit-box-shadow var(--transition-fast);
+  -o-transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    -webkit-transform var(--transition-fast),
+    -webkit-box-shadow var(--transition-fast);
 }
 
 .bandas__card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, .5);
+  -webkit-transform: translateY(-8px);
+      -ms-transform: translateY(-8px);
+          transform: translateY(-8px);
+  -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, .5);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, .5);
 }
 
 .bandas__icon {
@@ -442,16 +645,27 @@ body:hover .hero__scroll {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
-  filter:
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-filter:
     grayscale(1) brightness(0.55) contrast(1.15) saturate(0.6) sepia(0.15);
+          filter:
+    grayscale(1) brightness(0.55) contrast(1.15) saturate(0.6) sepia(0.15);
+  -webkit-transition: -webkit-filter var(--transition-slow), -webkit-transform var(--transition-slow);
+  transition: -webkit-filter var(--transition-slow), -webkit-transform var(--transition-slow);
+  -o-transition: filter var(--transition-slow), transform var(--transition-slow);
   transition: filter var(--transition-slow), transform var(--transition-slow);
+  transition: filter var(--transition-slow), transform var(--transition-slow), -webkit-filter var(--transition-slow), -webkit-transform var(--transition-slow);
 }
 
 .bandas__card:hover .bandas__image img {
-  filter:
+  -webkit-filter:
     grayscale(0) brightness(1) contrast(1) saturate(1);
-  transform: scale(1.1);
+          filter:
+    grayscale(0) brightness(1) contrast(1) saturate(1);
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .bandas__description {
@@ -511,33 +725,63 @@ body:hover .hero__scroll {
 }
 
 .albums__slider {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  gap: 1.25rem;
+  gap: 2rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  -ms-scroll-snap-type: x mandatory;
+      scroll-snap-type: x mandatory;
   padding-bottom: 1rem;
-  align-items: stretch;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: pan-x;
+      touch-action: pan-x;
+  cursor: -webkit-grab;
+  cursor: grab;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) transparent;
+}
+
+.albums__slider:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 
 .album {
-  flex: 0 0 40%;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 30%;
+          flex: 0 0 30%;
   scroll-snap-align: center;
   text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
 }
 
 .album img {
   width: 100%;
   border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
   margin-bottom: 1rem;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
 }
 
 .album__band {
-  font-size: .9rem;
-  margin-bottom: .5rem;
+  font-size: 1rem;
+  margin-bottom: .25rem;
   color: var(--color-accent);
   font-weight: 600;
 }
@@ -548,8 +792,7 @@ body:hover .hero__scroll {
 }
 
 .album__year {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
+  font-size: 0.85rem;
 }
 
 /* =====================================================
@@ -557,6 +800,19 @@ body:hover .hero__scroll {
 ===================================================== */
 .footer {
   width: 100%;
+  background: radial-gradient(
+      120% 120% at 50% -20%,
+      hsla(276, 71%, 21%, 0.122),
+      transparent 40%
+    ),
+    -webkit-gradient(linear, left top, left bottom, from(#14182a), to(#0e1118));
+  background: -o-radial-gradient(
+      50% -20%,
+      120% 120%,
+      hsla(276, 71%, 21%, 0.122),
+      transparent 40%
+    ),
+    -o-linear-gradient(top, #14182a 0%, #0e1118 100%);
   background: radial-gradient(
       120% 120% at 50% -20%,
       hsla(276, 71%, 21%, 0.122),
@@ -624,6 +880,8 @@ body:hover .hero__scroll {
 }
 
 .modal:target {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -635,7 +893,8 @@ body:hover .hero__scroll {
   max-height: 90vh;
   overflow-y: auto;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
+  -webkit-box-shadow: var(--shadow-soft);
+          box-shadow: var(--shadow-soft);
   position: relative;
   text-align: center;
   scrollbar-width: thin;
@@ -684,20 +943,57 @@ body:hover .hero__scroll {
    ANIMATIONS
 ===================================================== */
 
-@keyframes heroColorDrift {
+@-webkit-keyframes heroColorDrift {
   0% {
-    filter: hue-rotate(0deg);
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
     opacity: 0.6;
   }
 
   50% {
-    filter: hue-rotate(45deg);
+    -webkit-filter: hue-rotate(45deg);
+            filter: hue-rotate(45deg);
     opacity: 0.8;
   }
 
   100% {
-    filter: hue-rotate(-45deg);
+    -webkit-filter: hue-rotate(-45deg);
+            filter: hue-rotate(-45deg);
     opacity: 0.6;
+  }
+}
+
+@keyframes heroColorDrift {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+    opacity: 0.6;
+  }
+
+  50% {
+    -webkit-filter: hue-rotate(45deg);
+            filter: hue-rotate(45deg);
+    opacity: 0.8;
+  }
+
+  100% {
+    -webkit-filter: hue-rotate(-45deg);
+            filter: hue-rotate(-45deg);
+    opacity: 0.6;
+  }
+}
+
+@-webkit-keyframes bounce {
+
+  0%,
+  100% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+  }
+
+  50% {
+    -webkit-transform: translate(-50%, 10px);
+            transform: translate(-50%, 10px);
   }
 }
 
@@ -705,11 +1001,25 @@ body:hover .hero__scroll {
 
   0%,
   100% {
-    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
   }
 
   50% {
-    transform: translate(-50%, 10px);
+    -webkit-transform: translate(-50%, 10px);
+            transform: translate(-50%, 10px);
+  }
+}
+
+@-webkit-keyframes textShimmer {
+
+  0%,
+  100% {
+    color: var(--color-text-main);
+  }
+
+  50% {
+    color: var(--color-accent-soft);
   }
 }
 
@@ -725,49 +1035,153 @@ body:hover .hero__scroll {
   }
 }
 
-@keyframes fadeUp {
+@-webkit-keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+            transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
 }
 
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    -webkit-transform: translateX(-20px);
+            transform: translateX(-20px);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes timelineGlow {
+  from {
+    opacity: 0.4;
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+
+  to {
+    opacity: 0.7;
+    -webkit-filter: hue-rotate(8deg);
+            filter: hue-rotate(8deg);
   }
 }
 
 @keyframes timelineGlow {
   from {
     opacity: 0.4;
-    filter: hue-rotate(0deg);
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
   }
 
   to {
     opacity: 0.7;
-    filter: hue-rotate(8deg);
+    -webkit-filter: hue-rotate(8deg);
+            filter: hue-rotate(8deg);
   }
 }
 
 /* =====================================================
    RESPONSIVE MODE (mobile first)
 ===================================================== */
+@media (min-width: 576px) {
+
+  .nav {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    background: rgba(13, 15, 20, .7);
+  }
+
+  .nav__burger {
+    display: none;
+  }
+
+  .nav__list {
+    position: static;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: auto;
+    max-height: none;
+    background: transparent;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .nav__item {
+    padding: 0;
+  }
+
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.3rem;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    -webkit-transition: width var(--transition-fast);
+    -o-transition: width var(--transition-fast);
+    transition: width var(--transition-fast);
+  }
+
+  .nav__link:hover::after {
+    width: 100%;
+  }
+
+  body:has(#inicio:target) .nav__link[href="#inicio"]::after,
+  body:has(#historia:target) .nav__link[href="#historia"]::after,
+  body:has(#etapas:target) .nav__link[href="#etapas"]::after,
+  body:has(#bandas:target) .nav__link[href="#bandas"]::after {
+    width: 100%;
+  }
+  
+}
+
 @media (min-width: 768px) {
 
   body {
-  font-size: calc(var(--font-size) + 1px);
+    font-size: calc(var(--font-size) + 1px);
   }
 
   .section {
@@ -775,31 +1189,37 @@ body:hover .hero__scroll {
   }
 
   .etapas {
-    background-attachment: fixed;
-    /* solo en desktop por performance */
+    background-attachment: fixed; /* solo en desktop por performance */
   }
 
   .etapas__timeline::before {
     left: 50%;
-    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
   }
 
   .etapas__item {
+    display: -ms-grid;
     display: grid;
     margin: 0;
+    -ms-grid-columns: 1fr 120px 1fr;
     grid-template-columns: 1fr 120px 1fr;
   }
 
   .etapas__icon {
-    top: 10%;
+    top: 20%;
     left: 50%;
-    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
   }
 
   .etapas__item:nth-child(odd) .etapas__year,
   .etapas__item:nth-child(odd) .etapas__title,
   .etapas__item:nth-child(odd) .etapas__text,
   .etapas__item:nth-child(odd) .etapas__band {
+    -ms-grid-column: 1;
     grid-column: 1;
     text-align: right;
   }
@@ -808,6 +1228,7 @@ body:hover .hero__scroll {
   .etapas__item:nth-child(even) .etapas__title,
   .etapas__item:nth-child(even) .etapas__text,
   .etapas__item:nth-child(even) .etapas__band {
+    -ms-grid-column: 3;
     grid-column: 3;
     text-align: left;
   }
@@ -817,7 +1238,8 @@ body:hover .hero__scroll {
   }
 
   .album {
-    flex-basis: 30%;
+    -ms-flex-preferred-size: 20%;
+        flex-basis: 20%;
   }
 
   .modal__content {
