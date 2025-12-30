@@ -454,8 +454,6 @@ body:hover .hero__scroll {
     linear-gradient(rgba(13, 15, 20, 0.7),
       rgba(13, 15, 20, 0.8)),
     url("../img/parallax-bg.jpg") center / cover no-repeat;
-
-  background-attachment: fixed; /* Efecto Parallax */
 }
 
 .etapas::before {
@@ -1188,6 +1186,10 @@ body:hover .hero__scroll {
 
   .section {
     padding: 4rem 2rem;
+  }
+
+  .etapas {
+    background-attachment: fixed; /* Efecto Parallax -> solo en desktop por performance */
   }
 
   .etapas__timeline::before {
