@@ -1189,9 +1189,9 @@ body:hover .hero__scroll {
   }
 
   .etapas {
-    background-attachment: fixed; /* solo en desktop por performance */
+    background-attachment: fixed;
   }
-
+  
   .etapas__timeline::before {
     left: 50%;
     -webkit-transform: translateX(-50%);
