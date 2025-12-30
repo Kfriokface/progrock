@@ -63,14 +63,20 @@ Se incluye un archivo `robots.txt` configurado para **bloquear el rastreo de mot
 ## Estructura del proyecto
 
 ├── index.html
+
 ├── css/
+
 │ └── style.css
+
 ├── img/
+
 │ ├── albums/
+
 │ ├── bands/
+
 │ └── musicians/
-├── robots.txt
-└── README.md
+
+└── robots.txt
 
 ---
 
